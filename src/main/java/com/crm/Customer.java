@@ -15,17 +15,8 @@ public class Customer {
 	private String name;
     private String email;
     private String phoneNumber;
-	public Customer(long customerId, String name, String email, String phoneNumber) {
-		super();
-		CustomerId = customerId;
-		this.name = name;
-		this.email = email;
-		this.phoneNumber = phoneNumber;
-	}
-	public Customer() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    private String location;
+    private String signup;
 	public long getCustomerId() {
 		return CustomerId;
 	}
@@ -50,6 +41,34 @@ public class Customer {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	public String getSignup() {
+		return signup;
+	}
+	public void setSignup(String signup) {
+		this.signup = signup;
+	}
+	public Customer(long customerId, String name, String email, String phoneNumber, String location, String signup) {
+		super();
+		CustomerId = customerId;
+		this.name = name;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.location = location;
+		this.signup = signup;
+	}
+	public Customer() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+    
+	
+	
 	
     
     
