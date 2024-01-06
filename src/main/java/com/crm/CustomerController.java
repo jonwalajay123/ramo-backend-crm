@@ -1,7 +1,8 @@
 package com.crm;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,7 +10,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/customers")
-@CrossOrigin(origins = "http://localhost:3000")
 public class CustomerController {
 
     @Autowired
@@ -21,23 +21,30 @@ public class CustomerController {
     }
 
     @GetMapping("/{customerId}")
-    public Optional<Customer> getCustomerById(@PathVariable long customerId) {
-        return customerService.getCustomerById(customerId);
+    public ResponseEntity<Customer> getCustomerById(@PathVariable long customerId) {
+        Optional<Customer> customer = customerService.getCustomerById(customerId);
+        return customer.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping
-    public void createCustomer(@RequestBody Customer customer) {
-        customerService.createCustomer(customer);
+    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
+        Customer createdCustomer = customerService.createCustomer(customer);
+        return new ResponseEntity<>(createdCustomer, HttpStatus.CREATED);
     }
 
     @PutMapping("/{customerId}")
-    public void updateCustomer(@PathVariable long customerId, @RequestBody Customer updatedCustomer) {
-        customerService.updateCustomer(customerId, updatedCustomer);
+    public ResponseEntity<Customer> updateCustomer(@PathVariable long customerId, @RequestBody Customer customer) {
+        Customer updatedCustomer = customerService.updateCustomer(customerId, customer);
+        return updatedCustomer != null ?
+                new ResponseEntity<>(updatedCustomer, HttpStatus.OK) :
+                new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/{customerId}")
-    public void deleteCustomer(@PathVariable long customerId) {
+    public ResponseEntity<Void> deleteCustomer(@PathVariable long customerId) {
         customerService.deleteCustomer(customerId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
 

@@ -7,21 +7,21 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "customer")
+@Table(name = "customers")
 public class Customer {
-@Id
-@GeneratedValue(strategy = GenerationType.AUTO)
-	private long CustomerId;
-	private String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long customerId;
+    private String name;
     private String email;
     private String phoneNumber;
     private String location;
     private String signup;
 	public long getCustomerId() {
-		return CustomerId;
+		return customerId;
 	}
 	public void setCustomerId(long customerId) {
-		CustomerId = customerId;
+		this.customerId = customerId;
 	}
 	public String getName() {
 		return name;
@@ -55,7 +55,7 @@ public class Customer {
 	}
 	public Customer(long customerId, String name, String email, String phoneNumber, String location, String signup) {
 		super();
-		CustomerId = customerId;
+		this.customerId = customerId;
 		this.name = name;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
@@ -66,11 +66,13 @@ public class Customer {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
     
-	
+    // Getters and Setters
+}
+
 	
 	
     
     
 
-}
