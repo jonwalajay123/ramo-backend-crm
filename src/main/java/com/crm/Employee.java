@@ -23,21 +23,8 @@ public class Employee {
     private String email;
     private String phoneNumber;
     private String address;
-	public Employee() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public Employee(long employeeId, String firstName, String lastName, LocalDate dateOfBirth, String email,
-			String phoneNumber, String address) {
-		super();
-		this.employeeId = employeeId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.dateOfBirth = dateOfBirth;
-		this.email = email;
-		this.phoneNumber = phoneNumber;
-		this.address = address;
-	}
+    private String role;
+    private String department;
 	public long getEmployeeId() {
 		return employeeId;
 	}
@@ -80,8 +67,38 @@ public class Employee {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-  
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+	public String getDepartment() {
+		return department;
+	}
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+	public Employee(long employeeId, String firstName, String lastName, LocalDate dateOfBirth, String email,
+			String phoneNumber, String address, String role, String department) {
+		super();
+		this.employeeId = employeeId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dateOfBirth = dateOfBirth;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.address = address;
+		this.role = role;
+		this.department = department;
+	}
+	public Employee() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
     
+ 
+	
     
 }
 

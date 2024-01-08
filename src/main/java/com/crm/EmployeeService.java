@@ -12,36 +12,35 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepo employeeRepository;
 
-    public List<Employee> getAllEmployees() {
-        return employeeRepository.findAll();
+    public Employee createEmployee(Employee employee) {
+        return employeeRepository.save(employee);
     }
 
     public Optional<Employee> getEmployeeById(long employeeId) {
         return employeeRepository.findById(employeeId);
     }
 
-    public Employee createEmployee(Employee employee) {
-        // In a real application, you might add validation or other business logic
-        return employeeRepository.save(employee);
-    }
-
     public Employee updateEmployee(long employeeId, Employee updatedEmployee) {
-        Optional<Employee> optionalEmployee = employeeRepository.findById(employeeId);
-        if (optionalEmployee.isPresent()) {
-            Employee employee = optionalEmployee.get();
-            employee.setFirstName(updatedEmployee.getFirstName());
-            employee.setLastName(updatedEmployee.getLastName());
-            employee.setDateOfBirth(updatedEmployee.getDateOfBirth());
-            employee.setEmail(updatedEmployee.getEmail());
-            employee.setPhoneNumber(updatedEmployee.getPhoneNumber());
-            employee.setAddress(updatedEmployee.getAddress());
-            return employeeRepository.save(employee);
+        Optional<Employee> existingEmployeeOptional = employeeRepository.findById(employeeId);
+        if (existingEmployeeOptional.isPresent()) {
+            Employee existingEmployee = existingEmployeeOptional.get();
+            existingEmployee.setFirstName(updatedEmployee.getFirstName());
+            existingEmployee.setLastName(updatedEmployee.getLastName());
+            // Update other fields as needed
+
+            return employeeRepository.save(existingEmployee);
+        } else {
+            // Handle not found scenario
+            return null;
         }
-        return null; // Handle not found scenario
     }
 
     public void deleteEmployee(long employeeId) {
         employeeRepository.deleteById(employeeId);
+    }
+
+    public List<Employee> getAllEmployees() {
+        return employeeRepository.findAll();
     }
 }
 
