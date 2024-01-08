@@ -13,53 +13,26 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name ="project")
+@Table(name ="projects")
 public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String projectId;
+    private Long projectId;
     private String projectName;
     private LocalDate startDate;
     private LocalDate endDate;
+    private String customerId;
+    private String status;
 
-	 @OneToMany(cascade = CascadeType.ALL, mappedBy = "project") 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project") 
     private List<Task> tasks;
 
-	public Project(Long id, String projectId, String projectName, LocalDate startDate, LocalDate endDate,
-			List<Task> tasks) {
-		super();
-		this.id = id;
-		this.projectId = projectId;
-		this.projectName = projectName;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.tasks = tasks;
-	}
-	
-	
-
-	public Project() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getProjectId() {
+	public Long getProjectId() {
 		return projectId;
 	}
 
-	public void setProjectId(String projectId) {
+	public void setProjectId(Long projectId) {
 		this.projectId = projectId;
 	}
 
@@ -87,6 +60,22 @@ public class Project {
 		this.endDate = endDate;
 	}
 
+	public String getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public List<Task> getTasks() {
 		return tasks;
 	}
@@ -95,6 +84,23 @@ public class Project {
 		this.tasks = tasks;
 	}
 
+	public Project(Long projectId, String projectName, LocalDate startDate, LocalDate endDate, String customerId,
+			String status, List<Task> tasks) {
+		super();
+		this.projectId = projectId;
+		this.projectName = projectName;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.customerId = customerId;
+		this.status = status;
+		this.tasks = tasks;
+	}
+
+	public Project() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+    
     
 }
-

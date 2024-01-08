@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class TaskService {
@@ -16,28 +16,23 @@ public class TaskService {
         return taskRepository.findAll();
     }
 
-    public Optional<Task> getTaskById(Long id) {
-        return taskRepository.findById(id);
+    public Task getTaskById(Long taskId) {
+        return taskRepository.findById(taskId).orElse(null);
     }
 
     public Task createTask(Task task) {
         return taskRepository.save(task);
     }
 
-    public Task updateTask(Long id, Task task) {
-        if (taskRepository.existsById(id)) {
-            task.setId(id);
-            return taskRepository.save(task);
+    public Task updateTask(Long taskId, Task updatedTask) {
+        if (taskRepository.existsById(taskId)) {
+            updatedTask.setTaskId(taskId);
+            return taskRepository.save(updatedTask);
         }
-        return null; // Task with given id not found
+        return null;
     }
 
-    public boolean deleteTask(Long id) {
-        if (taskRepository.existsById(id)) {
-            taskRepository.deleteById(id);
-            return true;
-        }
-        return false; // Task with given id not found
+    public void deleteTask(Long taskId) {
+        taskRepository.deleteById(taskId);
     }
 }
-

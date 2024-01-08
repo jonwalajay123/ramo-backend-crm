@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProjectService {
@@ -16,28 +15,24 @@ public class ProjectService {
         return projectRepository.findAll();
     }
 
-    public Optional<Project> getProjectById(Long id) {
-        return projectRepository.findById(id);
+    public Project getProjectById(Long projectId) {
+        return projectRepository.findById(projectId).orElse(null);
     }
 
     public Project createProject(Project project) {
         return projectRepository.save(project);
     }
 
-    public Project updateProject(Long id, Project project) {
-        if (projectRepository.existsById(id)) {
-            project.setId(id);
-            return projectRepository.save(project);
+    public Project updateProject(Long projectId, Project updatedProject) {
+        if (projectRepository.existsById(projectId)) {
+            updatedProject.setProjectId(projectId);
+            return projectRepository.save(updatedProject);
         }
-        return null; // Project with given id not found
+        return null;
     }
 
-    public boolean deleteProject(Long id) {
-        if (projectRepository.existsById(id)) {
-            projectRepository.deleteById(id);
-            return true;
-        }
-        return false; // Project with given id not found
+    public void deleteProject(Long projectId) {
+        projectRepository.deleteById(projectId);
     }
 }
 
