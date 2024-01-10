@@ -12,14 +12,12 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name ="orders")
+@Table(name ="ord")
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String orderId;
+    private Long orderId;
     private LocalDate orderDate;
     private String customerId;
 
@@ -28,31 +26,10 @@ public class Order {
 
     private double totalAmount;
     private String status;
-	public Order() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public Order(Long id, String orderId, LocalDate orderDate, String customerId, List<OrderItem> orderItems,
-			double totalAmount, String status) {
-		super();
-		this.id = id;
-		this.orderId = orderId;
-		this.orderDate = orderDate;
-		this.customerId = customerId;
-		this.orderItems = orderItems;
-		this.totalAmount = totalAmount;
-		this.status = status;
-	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getOrderId() {
+	public Long getOrderId() {
 		return orderId;
 	}
-	public void setOrderId(String orderId) {
+	public void setOrderId(Long orderId) {
 		this.orderId = orderId;
 	}
 	public LocalDate getOrderDate() {
@@ -85,7 +62,21 @@ public class Order {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
+	public Order(Long orderId, LocalDate orderDate, String customerId, List<OrderItem> orderItems, double totalAmount,
+			String status) {
+		super();
+		this.orderId = orderId;
+		this.orderDate = orderDate;
+		this.customerId = customerId;
+		this.orderItems = orderItems;
+		this.totalAmount = totalAmount;
+		this.status = status;
+	}
+	public Order() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
     
 }
 

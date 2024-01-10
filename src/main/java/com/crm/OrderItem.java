@@ -11,14 +11,12 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name ="orderitem")
+@Table(name ="oi")
 public class OrderItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String productId;
+    private Long  productId;
     private String productName;
     private double price;
     private int quantity;
@@ -26,29 +24,10 @@ public class OrderItem {
     @JoinColumn(name ="order_id")
     @JsonBackReference
     private Order order;
-	public OrderItem() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public OrderItem(Long id, String productId, String productName, double price, int quantity, Order order) {
-		super();
-		this.id = id;
-		this.productId = productId;
-		this.productName = productName;
-		this.price = price;
-		this.quantity = quantity;
-		this.order = order;
-	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getProductId() {
+	public Long getProductId() {
 		return productId;
 	}
-	public void setProductId(String productId) {
+	public void setProductId(Long productId) {
 		this.productId = productId;
 	}
 	public String getProductName() {
@@ -75,8 +54,20 @@ public class OrderItem {
 	public void setOrder(Order order) {
 		this.order = order;
 	}
+	public OrderItem(Long productId, String productName, double price, int quantity, Order order) {
+		super();
+		this.productId = productId;
+		this.productName = productName;
+		this.price = price;
+		this.quantity = quantity;
+		this.order = order;
+	}
+	public OrderItem() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	
-
+    
     
 }
 

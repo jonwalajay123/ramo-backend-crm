@@ -1,10 +1,9 @@
 package com.crm;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class OrderService {
@@ -12,32 +11,32 @@ public class OrderService {
     @Autowired
     private OrderRepo orderRepository;
 
+    @SuppressWarnings("unused")
+	@Autowired
+    private OrderItemRepo orderItemRepository;
+
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
     }
 
-    public Optional<Order> getOrderById(Long id) {
-        return orderRepository.findById(id);
+    public Order getOrderById(Long orderId) {
+        return orderRepository.findById(orderId).orElse(null);
     }
 
     public Order createOrder(Order order) {
+        // Logic to set totalAmount and save orderItems if needed
         return orderRepository.save(order);
     }
 
-    public Order updateOrder(Long id, Order order) {
-        if (orderRepository.existsById(id)) {
-            order.setId(id);
-            return orderRepository.save(order);
+    public Order updateOrder(Long orderId, Order updatedOrder) {
+        if (orderRepository.existsById(orderId)) {
+            updatedOrder.setOrderId(orderId);
+            return orderRepository.save(updatedOrder);
         }
-        return null; // Order with given id not found
+        return null;
     }
 
-    public boolean deleteOrder(Long id) {
-        if (orderRepository.existsById(id)) {
-            orderRepository.deleteById(id);
-            return true;
-        }
-        return false; // Order with given id not found
+    public void deleteOrder(Long orderId) {
+        orderRepository.deleteById(orderId);
     }
 }
-

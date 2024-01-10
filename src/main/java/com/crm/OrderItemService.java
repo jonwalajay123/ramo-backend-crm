@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
-
 @Service
 public class OrderItemService {
 
@@ -16,28 +14,23 @@ public class OrderItemService {
         return orderItemRepository.findAll();
     }
 
-    public Optional<OrderItem> getOrderItemById(Long id) {
-        return orderItemRepository.findById(id);
+    public OrderItem getOrderItemById(Long productId) {
+        return orderItemRepository.findById(productId).orElse(null);
     }
 
     public OrderItem createOrderItem(OrderItem orderItem) {
         return orderItemRepository.save(orderItem);
     }
 
-    public OrderItem updateOrderItem(Long id, OrderItem orderItem) {
-        if (orderItemRepository.existsById(id)) {
-            orderItem.setId(id);
-            return orderItemRepository.save(orderItem);
+    public OrderItem updateOrderItem(Long productId, OrderItem updatedOrderItem) {
+        if (orderItemRepository.existsById(productId)) {
+            updatedOrderItem.setProductId(productId);
+            return orderItemRepository.save(updatedOrderItem);
         }
-        return null; // OrderItem with given id not found
+        return null;
     }
 
-    public boolean deleteOrderItem(Long id) {
-        if (orderItemRepository.existsById(id)) {
-            orderItemRepository.deleteById(id);
-            return true;
-        }
-        return false; // OrderItem with given id not found
+    public void deleteOrderItem(Long productId) {
+        orderItemRepository.deleteById(productId);
     }
 }
-

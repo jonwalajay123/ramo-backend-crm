@@ -1,16 +1,20 @@
 package com.crm;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
-@RequestMapping("/api/orderItems")
+@RequestMapping("/api/order-items")
 @CrossOrigin(origins = "http://localhost:3000")
 public class OrderItemController {
 
@@ -22,32 +26,23 @@ public class OrderItemController {
         return orderItemService.getAllOrderItems();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<OrderItem> getOrderItemById(@PathVariable Long id) {
-        Optional<OrderItem> orderItem = orderItemService.getOrderItemById(id);
-        return orderItem.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    @GetMapping("/{productId}")
+    public OrderItem getOrderItemById(@PathVariable Long productId) {
+        return orderItemService.getOrderItemById(productId);
     }
 
     @PostMapping
-    public ResponseEntity<OrderItem> createOrderItem(@RequestBody OrderItem orderItem) {
-        OrderItem createdOrderItem = orderItemService.createOrderItem(orderItem);
-        return new ResponseEntity<>(createdOrderItem, HttpStatus.CREATED);
+    public OrderItem createOrderItem(@RequestBody OrderItem orderItem) {
+        return orderItemService.createOrderItem(orderItem);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<OrderItem> updateOrderItem(@PathVariable Long id, @RequestBody OrderItem orderItem) {
-        OrderItem updatedOrderItem = orderItemService.updateOrderItem(id, orderItem);
-        return updatedOrderItem != null
-                ? new ResponseEntity<>(updatedOrderItem, HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    @PutMapping("/{productId}")
+    public OrderItem updateOrderItem(@PathVariable Long productId, @RequestBody OrderItem updatedOrderItem) {
+        return orderItemService.updateOrderItem(productId, updatedOrderItem);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteOrderItem(@PathVariable Long id) {
-        return orderItemService.deleteOrderItem(id)
-                ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
-                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    @DeleteMapping("/{productId}")
+    public void deleteOrderItem(@PathVariable Long productId) {
+        orderItemService.deleteOrderItem(productId);
     }
 }
-
