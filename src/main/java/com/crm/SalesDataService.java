@@ -1,18 +1,40 @@
 package com.crm;
 
 import java.util.List;
-import java.util.Optional;
 
-public interface SalesDataService {
-    List<SalesData> getAllSalesData();
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-    Optional<SalesData> getSalesDataById(long salesId);
+@Service
+public class SalesDataService {
 
-    SalesData createSalesData(SalesData salesData);
+    @Autowired
+    private SalesDataRepository salesDataRepository;
 
-    SalesData updateSalesData(long salesId, SalesData salesData);
+    public List<SalesData> getAllSalesData() {
+        return salesDataRepository.findAll();
+    }
 
-    void deleteSalesData(long salesId);
+    public SalesData getSalesDataById(long salesId) {
+        return salesDataRepository.findById(salesId).orElse(null);
+    }
+
+    public SalesData createSalesData(SalesData salesData) {
+        return salesDataRepository.save(salesData);
+    }
+
+    public SalesData updateSalesData(long salesId, SalesData updatedSalesData) {
+        if (salesDataRepository.existsById(salesId)) {
+            updatedSalesData.setSalesId(salesId);
+            return salesDataRepository.save(updatedSalesData);
+        }
+        return null;
+    }
+
+    public void deleteSalesData(long salesId) {
+        salesDataRepository.deleteById(salesId);
+    }
 }
+
 
 
