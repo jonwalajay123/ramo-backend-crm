@@ -9,14 +9,12 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "iitem")
+@Table(name = "invit1")
 public class InvoiceItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String serviceId;
+    private Long serviceId;
     private String serviceName;
     private double price;
     private int quantity;
@@ -25,34 +23,11 @@ public class InvoiceItem {
     @JoinColumn(name = "invoice_id")
     private Invoice invoice;
 
-	public InvoiceItem() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public InvoiceItem(Long id, String serviceId, String serviceName, double price, int quantity, Invoice invoice) {
-		super();
-		this.id = id;
-		this.serviceId = serviceId;
-		this.serviceName = serviceName;
-		this.price = price;
-		this.quantity = quantity;
-		this.invoice = invoice;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getServiceId() {
+	public Long getServiceId() {
 		return serviceId;
 	}
 
-	public void setServiceId(String serviceId) {
+	public void setServiceId(Long serviceId) {
 		this.serviceId = serviceId;
 	}
 
@@ -88,5 +63,20 @@ public class InvoiceItem {
 		this.invoice = invoice;
 	}
 
+	public InvoiceItem(Long serviceId, String serviceName, double price, int quantity, Invoice invoice) {
+		super();
+		this.serviceId = serviceId;
+		this.serviceName = serviceName;
+		this.price = price;
+		this.quantity = quantity;
+		this.invoice = invoice;
+	}
+
+	public InvoiceItem() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	
     
 }

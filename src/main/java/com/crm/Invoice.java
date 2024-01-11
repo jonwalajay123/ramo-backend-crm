@@ -12,14 +12,12 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name ="invoicee")
+@Table(name ="inv1")
 public class Invoice {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String invoiceId;
+    private Long invoiceId;
     private LocalDate invoiceDate;
     private String customerId;
 
@@ -29,31 +27,10 @@ public class Invoice {
 
     private double totalAmount;
     private String status;
-	public Invoice() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public Invoice(Long id, String invoiceId, LocalDate invoiceDate, String customerId, List<InvoiceItem> invoiceItems,
-			double totalAmount, String status) {
-		super();
-		this.id = id;
-		this.invoiceId = invoiceId;
-		this.invoiceDate = invoiceDate;
-		this.customerId = customerId;
-		this.invoiceItems = invoiceItems;
-		this.totalAmount = totalAmount;
-		this.status = status;
-	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getInvoiceId() {
+	public Long getInvoiceId() {
 		return invoiceId;
 	}
-	public void setInvoiceId(String invoiceId) {
+	public void setInvoiceId(Long invoiceId) {
 		this.invoiceId = invoiceId;
 	}
 	public LocalDate getInvoiceDate() {
@@ -86,7 +63,22 @@ public class Invoice {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
+	public Invoice(Long invoiceId, LocalDate invoiceDate, String customerId, List<InvoiceItem> invoiceItems,
+			double totalAmount, String status) {
+		super();
+		this.invoiceId = invoiceId;
+		this.invoiceDate = invoiceDate;
+		this.customerId = customerId;
+		this.invoiceItems = invoiceItems;
+		this.totalAmount = totalAmount;
+		this.status = status;
+	}
+	public Invoice() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+    
     
 }
 

@@ -1,12 +1,13 @@
 package com.crm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/invoices")
+@CrossOrigin(origins = "http://localhost:3000")
 public class InvoiceController {
 
     @Autowired
@@ -17,9 +18,9 @@ public class InvoiceController {
         return invoiceService.getAllInvoices();
     }
 
-    @GetMapping("/{id}")
-    public Optional<Invoice> getInvoiceById(@PathVariable Long id) {
-        return invoiceService.getInvoiceById(id);
+    @GetMapping("/{invoiceId}")
+    public Invoice getInvoiceById(@PathVariable Long invoiceId) {
+        return invoiceService.getInvoiceById(invoiceId);
     }
 
     @PostMapping
@@ -27,13 +28,13 @@ public class InvoiceController {
         return invoiceService.createInvoice(invoice);
     }
 
-    @PutMapping("/{id}")
-    public Invoice updateInvoice(@PathVariable Long id, @RequestBody Invoice updatedInvoice) {
-        return invoiceService.updateInvoice(id, updatedInvoice);
+    @PutMapping("/{invoiceId}")
+    public Invoice updateInvoice(@PathVariable Long invoiceId, @RequestBody Invoice updatedInvoice) {
+        return invoiceService.updateInvoice(invoiceId, updatedInvoice);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteInvoice(@PathVariable Long id) {
-        invoiceService.deleteInvoice(id);
+    @DeleteMapping("/{invoiceId}")
+    public void deleteInvoice(@PathVariable Long invoiceId) {
+        invoiceService.deleteInvoice(invoiceId);
     }
 }
