@@ -1,41 +1,42 @@
 package com.crm;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/leave-requests")
+@RequestMapping("/api/leaves")
 public class LeaveController {
 
     @Autowired
     private LeaveService leaveService;
 
     @GetMapping
-    public List<Leave> getAllLeaveRequests() {
-        return leaveService.getAllLeaveRequests();
+    public List<Leave> getAllLeaves() {
+        return leaveService.getAllLeaves();
     }
 
-    @GetMapping("/{employeeId}")
-    public Optional<Leave> getLeaveRequestByEmployeeId(@PathVariable long employeeId) {
-        return leaveService.getLeaveRequestByEmployeeId(employeeId);
+    @GetMapping("/{leaveId}")
+    public Leave getLeaveById(@PathVariable Long leaveId) {
+        return leaveService.getLeaveById(leaveId);
     }
 
     @PostMapping
-    public Leave createLeaveRequest(@RequestBody Leave leave) {
-        return leaveService.createLeaveRequest(leave);
+    public Leave createLeave(@RequestBody Leave leave) {
+        return leaveService.createLeave(leave);
     }
 
-    @PutMapping("/{employeeId}")
-    public Leave updateLeaveRequest(@PathVariable long employeeId, @RequestBody Leave updatedLeave) {
-        return leaveService.updateLeaveRequest(employeeId, updatedLeave);
+    @PutMapping("/{leaveId}")
+    public Leave updateLeave(@PathVariable Long leaveId, @RequestBody Leave leave) {
+        return leaveService.updateLeave(leaveId, leave);
     }
 
-    @DeleteMapping("/{employeeId}")
-    public void deleteLeaveRequest(@PathVariable long employeeId) {
-        leaveService.deleteLeaveRequest(employeeId);
+    @DeleteMapping("/{leaveId}")
+    public ResponseEntity<Void> deleteLeave(@PathVariable Long leaveId) {
+        leaveService.deleteLeave(leaveId);
+        return ResponseEntity.noContent().build();
     }
 }
-
+   

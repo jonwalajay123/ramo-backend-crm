@@ -15,28 +15,24 @@ public class Leave {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long employeeId;
+    private Long leaveId;
+    private String employeeId;
 
     private LocalDate startDate;
     private LocalDate endDate;
     private String leaveType;
     private String reason;
-	public Leave() {
-		super();
-		// TODO Auto-generated constructor stub
+    private String status;
+	public Long getLeaveId() {
+		return leaveId;
 	}
-	public Leave(long employeeId, LocalDate startDate, LocalDate endDate, String leaveType, String reason) {
-		super();
-		this.employeeId = employeeId;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.leaveType = leaveType;
-		this.reason = reason;
+	public void setLeaveId(Long leaveId) {
+		this.leaveId = leaveId;
 	}
-	public long getEmployeeId() {
+	public String getEmployeeId() {
 		return employeeId;
 	}
-	public void setEmployeeId(long employeeId) {
+	public void setEmployeeId(String employeeId) {
 		this.employeeId = employeeId;
 	}
 	public LocalDate getStartDate() {
@@ -63,7 +59,27 @@ public class Leave {
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
-
-   
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public Leave(Long leaveId, String employeeId, LocalDate startDate, LocalDate endDate, String leaveType,
+			String reason, String status) {
+		super();
+		this.leaveId = leaveId;
+		this.employeeId = employeeId;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.leaveType = leaveType;
+		this.reason = reason;
+		this.status = status;
+	}
+	public Leave() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+    
+	
 }
-
