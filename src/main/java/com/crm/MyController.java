@@ -10,12 +10,12 @@ public class MyController {
    @RequestMapping("/")
     public String home()
     {
-        return "this is Home page ";
+        return "CRM Project is Running ";
     }
    
-   @RequestMapping("/ajay")
+   @RequestMapping("/api")
    public String ajay()
    {
-       return "running spring boot project ";
+       return " All Api is Running ";
    }
 }
